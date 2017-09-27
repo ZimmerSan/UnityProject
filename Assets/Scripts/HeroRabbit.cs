@@ -7,11 +7,17 @@ public class HeroRabbit : MonoBehaviour {
 	public float speed = 1;
 	public float maxJumpTime = 2f;
 	public float jumpSpeed = 2f;
+	public float deathTotalTime = 1f;
 
 	bool isGrounded = false;
 	bool jumpActive = false;
+	float timeToDeath = -1000f;
 	float jumpTime = 0f;
+	float deathTime;
+	bool isRambo = false;
+	bool isDead = false;
 
+	Transform heroParent = null;
 	SpriteRenderer spriteRenderer = null;
 	Rigidbody2D myBody = null;
 	Animator animator = null;
@@ -21,6 +27,8 @@ public class HeroRabbit : MonoBehaviour {
 		spriteRenderer = GetComponent<SpriteRenderer>();
 		myBody = this.GetComponent<Rigidbody2D> ();
 		animator = this.GetComponent<Animator> ();
+		heroParent = this.transform.parent;
+		deathTime = deathTotalTime;
 		LevelController.current.setStartPosition (transform.position);
 	}
 
@@ -48,8 +56,17 @@ public class HeroRabbit : MonoBehaviour {
 		RaycastHit2D hit = Physics2D.Linecast (from, to, layerId);
 		Debug.DrawLine (from, to, Color.red);
 
-		if (hit) 	isGrounded = true;
-		else 		isGrounded = false;
+		if (hit) {
+			isGrounded = true;
+			//Перевіряємо чи ми опинились на платформі
+			if(hit.transform != null && hit.transform.GetComponent<MovingPlatform>() != null){
+				//Приліпаємо до платформи
+				setNewParent(hit.transform);
+			}
+		} else {
+			isGrounded = false;
+			setNewParent (heroParent);
+		}
 
 		if (Input.GetButtonDown ("Jump") && isGrounded) this.jumpActive = true;
 
@@ -71,6 +88,52 @@ public class HeroRabbit : MonoBehaviour {
 		if (this.isGrounded)	animator.SetBool ("jump", false);
 		else 					animator.SetBool ("jump", true);
 
+		if (isDead) {
+			timeToDeath -= Time.deltaTime;
+			if (timeToDeath <= 0) {
+				LevelController.current.onRabbitDeath (this);
+				isDead = false;
+				animator.SetBool ("die", false);
+			}
+		}
+
 	}
 
+	void setNewParent(Transform newParent) {
+		if (this.transform.parent != newParent) {
+			//Засікаємо позицію у Глобальних координатах
+			Vector3 pos = this.transform.position;
+
+			//Встановлюємо нового батька
+			this.transform.parent = newParent;
+
+			//Після зміни батька координати кролика зміняться
+			//Оскільки вони тепер відносно іншого об’єкта
+			//повертаємо кролика в ті самі глобальні координати
+			this.transform.position = pos;
+		}
+	}
+
+	public bool beRambo(bool really) {
+		if (really && !this.isRambo) {
+			this.isRambo = true;
+			this.transform.localScale += new Vector3 (0.5f, 0.5f, 0);
+			return true;
+		} else if (!really && this.isRambo) {
+			this.isRambo = false;
+			this.transform.localScale -= new Vector3 (0.5f, 0.5f, 0);
+			return true;
+		}
+		return false;
+	}
+
+	public void die (Transform killer) {
+		if (killer != null) {
+			animator.SetBool ("die", true);
+			timeToDeath = deathTotalTime;
+		} else {
+			timeToDeath = 0;
+		}
+		isDead = true;
+	}
 }

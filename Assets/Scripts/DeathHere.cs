@@ -6,9 +6,7 @@ public class DeathHere : MonoBehaviour {
 		
 	void OnTriggerEnter2D(Collider2D collider) {
 		HeroRabbit rabbit = collider.GetComponent<HeroRabbit> ();
-		if(rabbit != null) {
-			LevelController.current.onRabbitDeath(rabbit);
-		}
+		if(rabbit != null) rabbit.die (null);
 	}
 
 }

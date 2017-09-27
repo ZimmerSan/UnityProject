@@ -5,11 +5,6 @@ using UnityEngine;
 public class HeroFollow : MonoBehaviour {
 
 	public HeroRabbit rabbit;
-		
-	// Use this for initialization
-	void Start () {
-		
-	}
 	
 	// Update is called once per frame
 	void Update () {
@@ -24,4 +19,5 @@ public class HeroFollow : MonoBehaviour {
 
 		cameraTransform.position = cameraPosition;
 	}
+		
 }
