@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class HeroRabbit : MonoBehaviour {
 
+	public static HeroRabbit lastRabbit = null;
+
 	public float speed = 1;
 	public float maxJumpTime = 2f;
 	public float jumpSpeed = 2f;
@@ -21,6 +23,10 @@ public class HeroRabbit : MonoBehaviour {
 	SpriteRenderer spriteRenderer = null;
 	Rigidbody2D myBody = null;
 	Animator animator = null;
+
+	void Awake() {
+		lastRabbit = this;
+	}
 
 	// Use this for initialization
 	void Start () {
@@ -126,6 +132,8 @@ public class HeroRabbit : MonoBehaviour {
 		}
 		return false;
 	}
+
+	public bool isTheRambo() { return isRambo; }
 
 	public void die (Transform killer) {
 		if (killer != null) {
