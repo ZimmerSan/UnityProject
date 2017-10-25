@@ -29,7 +29,6 @@ public class OrcBrown : Orc {
 
 			Carrot carrot = obj.GetComponent<Carrot>();
 			carrot.launch(direction);
-
 		}
 	}
 

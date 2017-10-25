@@ -100,16 +100,16 @@ public class Orc : MonoBehaviour {
 	protected bool isRabbitDomineering() {
 		Vector3 rabbit_pos = HeroRabbit.lastRabbit.transform.position;
 		Vector3 my_pos = this.transform.position;
-		return Mathf.Abs(rabbit_pos.y) > Mathf.Abs(my_pos.y) && Mathf.Abs(rabbit_pos.x - my_pos.x) < 1f;
+		return rabbit_pos.y > my_pos.y + 0.8 && Mathf.Abs(rabbit_pos.x - my_pos.x) < 1.5f;
 	}
 
 	virtual protected bool isRabbitClose() {
 		Vector3 rabbit_pos = HeroRabbit.lastRabbit.transform.position;
 		Vector3 my_pos = this.transform.position;
 		if (!HeroRabbit.lastRabbit.isTheRambo()) {
-			return Mathf.Abs(rabbit_pos.x - my_pos.x) < 2f && (Mathf.Abs(rabbit_pos.y) - Mathf.Abs(my_pos.y))<1.7f;
+			return Mathf.Abs(rabbit_pos.x - my_pos.x) < 2f && Mathf.Abs(rabbit_pos.y - my_pos.y) < 2f;
 		} else {
-			return Mathf.Abs(rabbit_pos.x - my_pos.x) < 2f && (Mathf.Abs(rabbit_pos.y) - Mathf.Abs(my_pos.y)) < 2f;
+			return Mathf.Abs(rabbit_pos.x - my_pos.x) < 1.2f && Mathf.Abs(rabbit_pos.y - my_pos.y) < 1.8f;
 		}
 	}
 

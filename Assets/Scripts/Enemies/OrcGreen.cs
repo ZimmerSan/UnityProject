@@ -23,8 +23,9 @@ public class OrcGreen : Orc {
 	}
 
 	protected override bool isRabbitReachable() {
-		float rabbit_x = HeroRabbit.lastRabbit.transform.position.x;
-		return rabbit_x >= pointA.x && rabbit_x <= pointB.x;
+		Vector3 rabbit_pos = HeroRabbit.lastRabbit.transform.position;
+		Vector3 my_pos = this.transform.position;
+		return rabbit_pos.x >= pointA.x && rabbit_pos.x <= pointB.x && Mathf.Abs(rabbit_pos.y - my_pos.y) < 3f;
 	}
 
 	protected override void attack() {
@@ -35,8 +36,10 @@ public class OrcGreen : Orc {
 
 
 			if (isRabbitClose ()) {
+				Debug.Log ("Is close");
 				StartCoroutine (hitRabbit ());
 				if (isRabbitDomineering ()) {
+					Debug.Log ("Is domineering");
 					mode = Mode.Die;
 					StartCoroutine (die ());
 				} else {
