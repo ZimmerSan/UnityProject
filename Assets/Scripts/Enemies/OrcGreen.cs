@@ -74,6 +74,7 @@ public class OrcGreen : Orc {
 		animator.SetBool ("attack", true);
 		animator.SetBool ("walk", false);
 		animator.SetBool ("run", false);
+		if (SoundManager.Instance.isSoundOn()) this.attackSoundSource.Play ();
 		yield return new WaitForSeconds(1f);
 	}
 

@@ -11,6 +11,11 @@ public class LivesController : MonoBehaviour {
 	int lives;
 
 	public void removeLife() {
+		if (lives <= 0) {
+			LevelController.current.lose ();
+			return;
+		}
+
 		lives--;
 		lifeIcons.FindLast (isFullHeart).sprite2D = emptyHeart;
 	}

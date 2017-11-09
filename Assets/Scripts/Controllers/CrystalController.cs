@@ -9,8 +9,10 @@ public class CrystalController : MonoBehaviour {
 	public UI2DSprite redCrystal, greenCrystal, blueCrystal;
 	public Sprite redCrystalSprite, greenCrystalSprite, blueCrystalSprite;
 
+	public List<Crystal.Type> collectedCrystals;
+
 	public void addCrystal(Crystal crystal) {
-	switch (crystal.type) {
+		switch (crystal.type) {
 		case Crystal.Type.BLUE:
 			blueCrystal.sprite2D = blueCrystalSprite;
 			break;
@@ -21,8 +23,15 @@ public class CrystalController : MonoBehaviour {
 			greenCrystal.sprite2D = greenCrystalSprite;
 			break;
 		}
+
+		collectedCrystals.Add (crystal.type);
 	}
-		
+
+	void Start () {
+		LevelStatsistics stats = LevelStatsistics.load (LevelController.current.level);
+		collectedCrystals = stats.collectedCrystals;
+	}
+
 	void Awake () {
 		current = this;
 	}

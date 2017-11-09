@@ -117,6 +117,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47e47974046ac864f9bfb21a794abda6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  walkAudio: {fileID: 8300000, guid: 0d024189a711c440997b2d9f341c8dd0, type: 3}
+  attackAudio: {fileID: 0}
+  dieAudio: {fileID: 8300000, guid: 7553580dee44e4f96b2efa5f4e5e17c3, type: 3}
+  walkAudioSource: {fileID: 0}
+  attackAudioSource: {fileID: 0}
+  dieAudioSource: {fileID: 0}
   speed: 3
   maxJumpTime: 2
   jumpSpeed: 5

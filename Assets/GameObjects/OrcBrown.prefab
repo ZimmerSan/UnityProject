@@ -118,9 +118,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoveBy: {x: 2, y: 0, z: 0}
-  cooldown: 5
+  attackSound: {fileID: 8300000, guid: 17ceaa42e8466455b8b6886e78c357f9, type: 3}
+  dieSound: {fileID: 8300000, guid: 0da0a61767f664de1a8b3e03d7ca4d4e, type: 3}
+  attackSoundSource: {fileID: 0}
+  dieSoundSource: {fileID: 0}
   normalSpeed: 1
-  attackSpeed: 2
   prefabCarrot: {fileID: 1724554257402218, guid: 8490f9412f4ef374d986399802f46c7f,
     type: 2}
   carrot_radius: 5

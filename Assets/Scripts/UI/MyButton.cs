@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class MyButton : MonoBehaviour {
 
-	public MyButton playButton;
+	public MyButton playButton, pauseButton;
 
 	public UnityEvent signalOnClick = new UnityEvent();
 
@@ -15,11 +15,10 @@ public class MyButton : MonoBehaviour {
 
 
 	void Start () {
-		playButton.signalOnClick.AddListener (this.onPlay);
+		if (playButton != null ) playButton.signalOnClick.AddListener (this.onPlay);
 	}
 
 	void onPlay() {
-		Debug.Log ("clicked");
 		SceneManager.LoadScene ("ChooseLevelScene");
 	}
 

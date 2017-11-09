@@ -4,34 +4,45 @@ using UnityEngine;
 
 public class LevelController : MonoBehaviour {
 
+	public int level;
 	public static LevelController current;
 
 	public UILabel coinsLabel;
-	public UILabel fruitsLabel, totalFruitsLabel;
 
-	int coins;
-	int fruits, totalFruits;
+	public int coins;
+
+	public AudioClip music = null;
+	AudioSource musicSource = null;
 
 	Vector3 startingPosition;
 
+	public GameObject losePopUpPrefab;
+	public GameObject settingsPrefab;
+
 	void Awake() {
+		musicSource = gameObject.AddComponent<AudioSource>();
+		musicSource.clip = music;
+		musicSource.loop = true;
+
+		if (PlayerPrefs.GetInt("music", 1) == 1){
+			musicSource.Play();
+		}
+		GameStatistics gameStats = GameStatistics.load ();
+		coins = gameStats.collectedCoins;
 		current = this;
-		coins = 0;
 	}
 
-	void Start() {
-		Fruit[] allFruits = GameObject.FindObjectsOfType<Fruit>();
-		totalFruits = allFruits.Length;
-		totalFruitsLabel.text = totalFruits.ToString();
+	public void toggleMusic(bool enable) {
+		PlayerPrefs.SetInt("music", enable ? 1 : 0);
+
+		if (enable) musicSource.Play();
+		else 		musicSource.Stop();
 	}
 
 	public void addCoin() { coins++; }
 
-	public void addFruit() { fruits++; }
-
 	void Update() {
 		coinsLabel.text = coins.ToString("D4");
-		fruitsLabel.text = fruits.ToString();
 	}
 
 	public void setStartPosition (Vector3 position) { this.startingPosition = position; }
@@ -44,5 +55,40 @@ public class LevelController : MonoBehaviour {
 
 	public void addCrystal(Crystal crystal) {
 		CrystalController.current.addCrystal (crystal);
+	}
+
+	public void addFruit(int fruitId) { 
+		FruitController.current.addFruit (fruitId);
+	}
+
+	public void addLife() {
+		LivesController.current.addLife ();
+	}
+
+	public void lose() {
+		GameObject parent = UICamera.first.transform.parent.gameObject;
+		GameObject obj = NGUITools.AddChild(parent, losePopUpPrefab);
+		LosePopUp loosePopUp = obj.GetComponent<LosePopUp>();
+	}
+
+	public LevelStatsistics getStats() {
+		LevelStatsistics stats = new LevelStatsistics {
+	    	level = level,
+	        levelPassed = true,
+			collectedFruits = new List<int>(FruitController.current.collectedFruits),
+			totalFruits = FruitController.current.totalFruits,
+			allFruitsCollected = FruitController.current.collectedFruits.Count >= FruitController.current.totalFruits,
+			collectedCrystals = CrystalController.current.collectedCrystals,
+			allCrystalsCollected = CrystalController.current.collectedCrystals.Count >= 3,
+			collectedCoins = coins
+		};
+
+		return stats;
+	}
+
+	public void showSettings() {
+		GameObject parent = UICamera.first.transform.parent.gameObject;
+		GameObject obj = NGUITools.AddChild(parent, settingsPrefab);
+		SettingsPopUp popup = obj.GetComponent<SettingsPopUp>();
 	}
 }

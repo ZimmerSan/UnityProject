@@ -29,6 +29,8 @@ public class OrcBrown : Orc {
 
 			Carrot carrot = obj.GetComponent<Carrot>();
 			carrot.launch(direction);
+
+			if (SoundManager.Instance.isSoundOn()) this.attackSoundSource.Play ();
 		}
 	}
 

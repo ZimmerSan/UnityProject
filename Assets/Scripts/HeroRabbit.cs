@@ -6,6 +6,9 @@ public class HeroRabbit : MonoBehaviour {
 
 	public static HeroRabbit lastRabbit = null;
 
+	public AudioClip walkAudio, dieAudio;
+	public AudioSource walkAudioSource, dieAudioSource;
+
 	public float speed = 1;
 	public float maxJumpTime = 2f;
 	public float jumpSpeed = 2f;
@@ -26,6 +29,12 @@ public class HeroRabbit : MonoBehaviour {
 
 	void Awake() {
 		lastRabbit = this;
+
+		walkAudioSource = gameObject.AddComponent<AudioSource>();
+		dieAudioSource = gameObject.AddComponent<AudioSource>();
+
+		walkAudioSource.clip = walkAudio;
+		dieAudioSource.clip = dieAudio;
 	}
 
 	// Use this for initialization
@@ -43,6 +52,7 @@ public class HeroRabbit : MonoBehaviour {
 		//Handle horizontal movement
 		float value = Input.GetAxis ("Horizontal");
 		if (Mathf.Abs (value) > 0) {
+			if (!walkAudioSource.isPlaying && SoundManager.Instance.isSoundOn()) walkAudioSource.Play ();
 			animator.SetBool ("run", true);
 
 			Vector2 vel = myBody.velocity;
@@ -52,6 +62,7 @@ public class HeroRabbit : MonoBehaviour {
 			if (value < 0)		spriteRenderer.flipX = true;
 			else if (value > 0)	spriteRenderer.flipX = false;
 		} else {
+			if (walkAudioSource.isPlaying) walkAudioSource.Pause ();
 			animator.SetBool ("run", false);
 		}
 
@@ -142,6 +153,7 @@ public class HeroRabbit : MonoBehaviour {
 		} else {
 			timeToDeath = 0;
 		}
+		if (SoundManager.Instance.isSoundOn()) dieAudioSource.Play ();
 		isDead = true;
 	}
 }

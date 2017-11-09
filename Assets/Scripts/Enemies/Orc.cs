@@ -15,6 +15,9 @@ public class Orc : MonoBehaviour {
 	protected Rigidbody2D body = null;
 	protected SpriteRenderer sr = null;
 
+	public AudioClip attackSound, dieSound;
+	public AudioSource attackSoundSource, dieSoundSource;
+
 	public enum Mode {
 		GoToA,
 		GoToB,
@@ -40,6 +43,12 @@ public class Orc : MonoBehaviour {
 		animator = GetComponent<Animator>();
 		body = GetComponent<Rigidbody2D>();
 		sr = GetComponent<SpriteRenderer>();
+
+		attackSoundSource = gameObject.AddComponent<AudioSource>();
+		attackSoundSource.clip = attackSound;
+
+		dieSoundSource = gameObject.AddComponent<AudioSource>();
+		dieSoundSource.clip = dieSound;
 	}
 
 	void FixedUpdate () {
@@ -124,7 +133,9 @@ public class Orc : MonoBehaviour {
 			animator.SetBool ("walk", false);
 			animator.SetBool ("run", false);
 
+			if (SoundManager.Instance.isSoundOn ()) this.dieSoundSource.Play ();
 			yield return new WaitForSeconds(0.8f);
+
 			Destroy(this.gameObject);
 		}
 	}

@@ -7,7 +7,7 @@ public class Door : Collectable {
 	public int level = 1;
 
 	protected override void OnRabitHit(HeroRabbit rabbit) {
-		Debug.Log ("hit");
+		if(level == 1 || LevelStatsistics.load(level-1).levelPassed)
 		SceneManager.LoadScene ("Level" + level);
 	}
 
