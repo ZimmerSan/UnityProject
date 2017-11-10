@@ -66,6 +66,7 @@ public class LevelController : MonoBehaviour {
 	}
 
 	public void lose() {
+		Destroy (HeroRabbit.lastRabbit);
 		GameObject parent = UICamera.first.transform.parent.gameObject;
 		GameObject obj = NGUITools.AddChild(parent, losePopUpPrefab);
 		LosePopUp loosePopUp = obj.GetComponent<LosePopUp>();

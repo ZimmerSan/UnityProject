@@ -1439,7 +1439,8 @@ MonoBehaviour:
   coinsLabel: {fileID: 1031273581}
   coins: 0
   music: {fileID: 8300000, guid: 57a5b2120c2d04fa9bcb5b2e99ee9361, type: 3}
-  losePopUpPrefab: {fileID: 0}
+  losePopUpPrefab: {fileID: 1926803599172066, guid: 57e19f5d39d2c9c45b10c4431b47cd79,
+    type: 2}
   settingsPrefab: {fileID: 1163953632363300, guid: 2527470807a12d14dadef9745c1a1ece,
     type: 2}
 --- !u!4 &708777193

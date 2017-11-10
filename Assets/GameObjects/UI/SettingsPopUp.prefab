@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4273965568531710}
   - component: {fileID: 114741220181972752}
+  - component: {fileID: 61949052783401676}
   m_Layer: 5
   m_Name: PopUpBackground
   m_TagString: Untagged
@@ -153,7 +154,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1163953632363300}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 41, y: -114, z: 0}
+  m_LocalPosition: {x: 8662, y: 74, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4035934540927094}
@@ -330,6 +331,31 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 290.90912, y: 300}
   m_EdgeRadius: 0
+--- !u!61 &61949052783401676
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1124742859899338}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -1.8042603, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1827.5981, y: 1382}
+  m_EdgeRadius: 0
 --- !u!114 &114095718849898920
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -342,9 +368,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tweenTarget: {fileID: 1705361186735370}
-  hover: {r: 0.3803922, g: 0.3803922, b: 0.3803922, a: 1}
-  pressed: {r: 0.7176471, g: 0.6392157, b: 0.48235294, a: 1}
-  disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  hover: {r: 0.3803922, g: 0.3803922, b: 0.3803922, a: 0.566}
+  pressed: {r: 0.7176471, g: 0.6392157, b: 0.48235294, a: 0.566}
+  disabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.584}
   duration: 0.2
   dragHighlight: 0
   hoverSprite: 
@@ -745,7 +771,7 @@ MonoBehaviour:
   mHeight: 1382
   mDepth: 10
   mMat: {fileID: 0}
-  autoResizeBoxCollider: 0
+  autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
   aspectRatio: 1.4804631
@@ -796,7 +822,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
-  mColor: {r: 0.2784314, g: 0.2784314, b: 0.2784314, a: 1}
+  mColor: {r: 0, g: 0, b: 0, a: 0.616}
   mPivot: 4
   mWidth: 7746
   mHeight: 6520

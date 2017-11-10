@@ -13,6 +13,8 @@ public class LevelFinish : Collectable {
 		LevelStatsistics stats = LevelController.current.getStats();
 		winPopUp.setStats(stats);
 
+		Destroy (HeroRabbit.lastRabbit);
+
 		stats.save();
 	}
 }
