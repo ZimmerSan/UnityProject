@@ -17,15 +17,12 @@ public class FruitController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		Fruit[] allFruits = GameObject.FindObjectsOfType<Fruit>();
-		for (int i = 0; i < allFruits.Length; i++) allFruits [i].id = i;
-
-		int totalFruits = allFruits.Length;
-		totalFruitsLabel.text = totalFruits.ToString();	
-		this.totalFruits = totalFruits;
-
 		LevelStatsistics stats = LevelStatsistics.load (LevelController.current.level);
 		collectedFruits = new HashSet<int>(stats.collectedFruits);
+
+		Fruit[] allFruits = GameObject.FindObjectsOfType<Fruit>();
+		this.totalFruits = allFruits.Length;
+		totalFruitsLabel.text = totalFruits.ToString();	
 	}
 
 	void Update() {

@@ -8,16 +8,18 @@ public class HeroFollow : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		Transform rabbitTransform = rabbit.transform;
-		Transform cameraTransform = this.transform;
+		if (rabbit != null) {
+			Transform rabbitTransform = rabbit.transform;
+			Transform cameraTransform = this.transform;
 
-		Vector3 rabbitPosition = rabbitTransform.position;
-		Vector3 cameraPosition = cameraTransform.position;
+			Vector3 rabbitPosition = rabbitTransform.position;
+			Vector3 cameraPosition = cameraTransform.position;
 
-		cameraPosition.x = rabbitPosition.x;
-		cameraPosition.y = rabbitPosition.y;
+			cameraPosition.x = rabbitPosition.x;
+			cameraPosition.y = rabbitPosition.y;
 
-		cameraTransform.position = cameraPosition;
+			cameraTransform.position = cameraPosition;
+		}
 	}
 		
 }

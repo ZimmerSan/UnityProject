@@ -16,12 +16,12 @@ public class LevelStatsistics {
 	public List<Crystal.Type> collectedCrystals = new List<Crystal.Type>();
 
 	public void save() {
+		Debug.Log ("Level stats = " + JsonUtility.ToJson (this));
 		GameStatistics stats = GameStatistics.load();
 		LevelStatsistics found = stats.levelStats.Find (p => p.level == level);
-		if (found != null)
-			found = this;
-		else
-			stats.levelStats.Add (this);
+		if (found != null) 
+			stats.levelStats.Remove(found);
+		stats.levelStats.Add (this);
 		
 		stats.collectedCoins = collectedCoins;
 		stats.save();

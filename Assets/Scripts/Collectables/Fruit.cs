@@ -6,9 +6,10 @@ public class Fruit : Collectable {
 	
 	public int id;
 
-	bool isCollected;
+	public bool isCollected = false;
 
 	protected override void OnRabitHit(HeroRabbit rabbit) {
+		Debug.Log ("Collect. Id = " +  id + ", Is collected? " + isCollected);
 		if (!isCollected) {
 			LevelController.current.addFruit (id);
 			this.CollectedHide ();
@@ -18,11 +19,11 @@ public class Fruit : Collectable {
 	void Start () {
 		LevelStatsistics stats = LevelStatsistics.load(LevelController.current.level);
 		isCollected = stats.collectedFruits.Contains(id);
-
-		 if (isCollected) this.CollectedHide ();
+		if (isCollected) this.CollectedHide ();
 	}
 
 	public void CollectedHide () {
+		isCollected = true;
 		SpriteRenderer sr = this.GetComponent<SpriteRenderer>();
 		Color tmp = sr.color;
 		tmp.a = 0.5f;

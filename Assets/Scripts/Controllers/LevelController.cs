@@ -54,7 +54,7 @@ public class LevelController : MonoBehaviour {
 	}
 
 	public void addCrystal(Crystal crystal) {
-		CrystalController.current.addCrystal (crystal);
+		CrystalController.current.addCrystal (crystal.type);
 	}
 
 	public void addFruit(int fruitId) { 
@@ -79,7 +79,7 @@ public class LevelController : MonoBehaviour {
 			collectedFruits = new List<int>(FruitController.current.collectedFruits),
 			totalFruits = FruitController.current.totalFruits,
 			allFruitsCollected = FruitController.current.collectedFruits.Count >= FruitController.current.totalFruits,
-			collectedCrystals = CrystalController.current.collectedCrystals,
+			collectedCrystals = new List<Crystal.Type>(CrystalController.current.collectedCrystals),
 			allCrystalsCollected = CrystalController.current.collectedCrystals.Count >= 3,
 			collectedCoins = coins
 		};

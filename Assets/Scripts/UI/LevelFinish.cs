@@ -11,6 +11,9 @@ public class LevelFinish : Collectable {
 		WinPopUp winPopUp = obj.GetComponent<WinPopUp>();
 
 		LevelStatsistics stats = LevelController.current.getStats();
+		foreach (int f in stats.collectedFruits)
+			Debug.Log (f);
+		
 		winPopUp.setStats(stats);
 
 		Destroy (HeroRabbit.lastRabbit);
